@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocumentConvertionController;
+use App\Http\Controllers\UserController;
+use App\Models\DocumentFile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', DashboardController::class)->name('dashboard');
+Route::resource('document', DocumentController::class);
+Route::resource('documentFile', DocumentFile::class);
+Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
+Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
+Route::resource('user', UserController::class);
