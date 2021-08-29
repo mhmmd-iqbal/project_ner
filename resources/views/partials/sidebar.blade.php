@@ -18,7 +18,7 @@
                     >
                         <div class="user-pic">
                             <img
-                                src="{!! asset('template/assets/images/users/1.jpg') !!}"
+                                src="{{{ URL::asset('template/assets/images/users/1.jpg') }}}"
                                 alt="users"
                                 class="rounded-circle"
                                 width="40"
