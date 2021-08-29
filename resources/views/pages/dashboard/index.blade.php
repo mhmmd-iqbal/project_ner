@@ -12,6 +12,7 @@
                     console.log('Data:', data);
                     document.getElementById('name').innerHTML = data.creator
                     document.getElementById('loadContent').innerHTML = ''
+                    document.getElementById('listData').innerHTML = ''
                     data.files.map((e) => {
                         let idFile = e.id
 
@@ -24,8 +25,7 @@
     
                                 var matchesAPPAStyle = dataFile.data.match(/\((.*?)\)/g);
                                 if(matchesAPPAStyle){
-                                    console.log(matchesAPPAStyle)
-                                    document.getElementById('listData').innerHTML = ''
+                                    // console.log(matchesAPPAStyle)
                                     matchesAPPAStyle.map((list) => {
                                         document.getElementById('listData').innerHTML += `<div class="col-2">${list}</div>`
                                     })
@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
