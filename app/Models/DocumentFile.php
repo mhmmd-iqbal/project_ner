@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentFile extends Model
 {
-    use HasFactory;
 
     protected $table = 'document_files';
 

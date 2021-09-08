@@ -14,7 +14,8 @@ class CreateDocumentFilesTable extends Migration
     public function up()
     {
         Schema::create('document_files', function (Blueprint $table) {
-             $table->id();
+            $table->bigIncrements('id');
+
             $table->bigInteger('document_id')->unsigned();
             $table->string('file_name', 100)->nullable();
             $table->softDeletes();
