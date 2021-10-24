@@ -28,7 +28,7 @@ Route::prefix('admin')->group(function () {
     Route::namespace('Admin')->group(function() {
         Route::get('/', DashboardController::class)->name('dashboard');
         Route::resource('document', DocumentController::class);
-        Route::resource('documentFile', DocumentFile::class);
+        Route::resource('documentFile', DocumentFileController::class);
         Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
         Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
         Route::resource('user', UserController::class);

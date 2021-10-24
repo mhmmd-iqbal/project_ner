@@ -12,7 +12,8 @@ class DocumentFile extends Model
 
     protected $fillable = [
         'document_id',
-        'file_name'
+        'file_name',
+        'converted_text'
     ];
 
     public function skripsi(){

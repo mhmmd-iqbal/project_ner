@@ -25,6 +25,7 @@
     }
 
     .content-search .result .description {
+        padding-top: .5em;
         text-align: justify;
         font-style: italic
     }
@@ -56,18 +57,9 @@
                 </h4>
                 <div>Oleh <span>{{$document->creator}}</span></div>
                 <div class="description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero dicta quis pariatur doloremque accusamus in doloribus sed laboriosam nam. Excepturi ipsam, reprehenderit iste cumque accusamus natus dolorem quod eius autem.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero dicta quis pariatur doloremque accusamus in doloribus sed laboriosam nam. Excepturi ipsam, reprehenderit iste cumque accusamus natus dolorem quod eius autem.
-                </div>
-            </div>
-            <div class="result my-2">
-                <h4>
-                    <a href="{{route('show', $document->id)}}"> {{$document->title}} </a>
-                </h4>
-                <div>Oleh <span>{{$document->creator}}</span></div>
-                <div class="description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero dicta quis pariatur doloremque accusamus in doloribus sed laboriosam nam. Excepturi ipsam, reprehenderit iste cumque accusamus natus dolorem quod eius autem.
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero dicta quis pariatur doloremque accusamus in doloribus sed laboriosam nam. Excepturi ipsam, reprehenderit iste cumque accusamus natus dolorem quod eius autem.
+                    @foreach ($document->files as $file)
+                        {{$string = mb_strimwidth($file->converted_text, 0, 97, '...') }}
+                    @endforeach
                 </div>
             </div>
             @endforeach

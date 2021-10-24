@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\User;
+use App\Traits\DocxConversion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,6 +50,7 @@ class DocumentController extends Controller
             ]);
         }else{
             DB::transaction(function () use ($request) {
+                $converted_text = null;
                 $document = Document::create(
                     [
                         'title'     => $request->input('title'),
@@ -57,9 +59,16 @@ class DocumentController extends Controller
                 );
 
                 foreach ($request->input('files') as $key => $file) {
+                    $path =  public_path('documents/'.$file);
+                    $information = DocxConversion::extract_information($path);
+                    if($information['status'] === 'success') {
+                        $converted_text = $information['data'];
+                    }  
+
                     $document->files()->create(
                         [
                             'file_name'         => $file,
+                            'converted_text'    => $converted_text
                         ]
                     );
                 }

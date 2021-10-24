@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Traits\DocxConversion;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +17,8 @@ class HomeController extends Controller
     {
         $input = $request->input();
 
-        $documents = Document::get();
+        $documents = Document::with('files')->get();
+
         return view('apps.pages.search', compact('documents'));
     }
 
