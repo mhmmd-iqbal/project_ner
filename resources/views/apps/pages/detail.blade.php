@@ -71,66 +71,49 @@
             data.files.map((e) => {
                 id = e.id
                 url = "{{route('convertion.file', 'dataID')}}".replace('dataID', id)
-                ajaxRequest('GET', url)
-                .then(dataFile => {
-                    if(dataFile.status === 'success'){
-                        document.getElementById('load-content').innerHTML += `
-                        <div class="p-2 mt-1">${dataFile.data}
-                        </div>`
 
-                        documentText += dataFile.data
+                documentText = e.converted_text
 
-                        var matchesAPPAStyle = dataFile.data.match(/\((.*?)\)/g);
-                        var matchesIAAStyle = dataFile.data.match(/\([.*?]\)/g)
-                        if(matchesAPPAStyle){
-                            matchesAPPAStyle.map((list) => {
-                                string = (list)
-                                .replace(/ /g,'')
-                                .split(":")
-                                .pop()
-                                
-                                if(string.indexOf(',') != -1 ) {
-                                    console.log(string.match(/\d+/))
-                                    if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
-                                    .match(/^[0-9]{4}$/)) {
-                                        console.log(list)
-                                        document.getElementById('list-data').innerHTML += `<div class="col-2">${list}</div>`
-                                        document.getElementById('list-kutipan').innerHTML += 
-                                            `
-                                            <div class="row">
-                                                <div class="col-3 text-left" style="border: 1px solid black;">
-                                                    ${list}
-                                                </div>
-                                                <div class="col-9 text-left" style="border: 1px solid black;">
-                                                    lorem ipsum
-                                                </div>
-                                            </div>
-                                            `
-                                    }
-                                }
+                let matchesAPPAStyle = e.converted_text.match(/\((.*?)\)/g);  // dari text menghasilkan array
+                let matchesIAAStyle = e.converted_text.match(/\([.*?]\)/g)
+                console.table(matchesAPPAStyle);
+                
+                if(matchesAPPAStyle){
+                    matchesAPPAStyle.map((list) => {
+                        // menghapus semua spasi
+                        string = (list)
+                            .replace(/ /g,'')
+                            .split(":")
+                            .pop()
 
-                                // document.getElementById('list-kutipan').innerHTML += 
-                                //     `<div class="col-2 text-left">
-                                //         ${list}
-                                //     </div>
-                                //     <div class="col-10 text-left">
-                                //         lorem ipsum
-                                //     </div>
-                                //     `
-                            })
+
+                        // cek apakah ada tanda comma
+                        if(string.indexOf(',') != -1 ) {
+                            // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
+                            if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
+                            .match(/^[0-9]{4}$/)) {
+
+                                documentText = documentText.replace(`${list}`, `<span style="font-weight: bold">${list}</span>`)
+
+                                document.getElementById('list-data').innerHTML += `<div class="col-2">${list}</div>`
+                                document.getElementById('list-kutipan').innerHTML += 
+                                    `
+                                    <div class="row">
+                                        <div class="col-3 text-left" style="border: 1px solid black;">
+                                            ${list}
+                                        </div>
+                                        <div class="col-9 text-left" style="border: 1px solid black;">
+                                            lorem ipsum
+                                        </div>
+                                    </div>
+                                    `
+                            }
                         }
-                        
-                        // if(matchesIAAStyle){
-                        //     matchesIAAStyle.map((list) => {
-                        //         document.getElementById('list-data').innerHTML += `<div class="col-2">${list}</div>`
-                        //     })
-                        // }
-                    }
-                    // document.getElementById('load-content').innerHTML = `
-                    //     <div class="p-2 mt-1">${dataFile.data}
-                    //     </div>`
-                })
-                .catch()
+                    })
+                }
+
+                document.getElementById('load-content').innerHTML += 
+                    `<div class="p-2 mt-1">${documentText}</div>`
             })
         })
         
