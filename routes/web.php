@@ -25,7 +25,7 @@ Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 
 Route::prefix('admin')->group(function () {
-    Route::namespace('admin')->group(function() {
+    Route::namespace('Admin')->group(function() {
         Route::get('/', DashboardController::class)->name('dashboard');
         Route::resource('document', DocumentController::class);
         Route::resource('documentFile', DocumentFile::class);
