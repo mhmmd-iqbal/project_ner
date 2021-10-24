@@ -18,17 +18,20 @@
 |
 */
 
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'] )->name('index');
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('document', DocumentController::class);
-    Route::resource('documentFile', DocumentFile::class);
-    Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
-    Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
-    Route::resource('user', UserController::class);
-    Route::resource('quotation', QuotationController::class);
+    Route::namespace('admin')->group(function() {
+        Route::get('/', DashboardController::class)->name('dashboard');
+        Route::resource('document', DocumentController::class);
+        Route::resource('documentFile', DocumentFile::class);
+        Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
+        Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
+        Route::resource('user', UserController::class);
+        Route::resource('quotation', QuotationController::class);
+    });
 });

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -26,7 +26,7 @@
             }
 
             .flex-center {
-                align-items: center;
+                /* align-items: center; */
                 display: flex;
                 justify-content: center;
             }
@@ -62,7 +62,8 @@
             }
 
             .links > a:hover {
-                color: #0bdacc
+                color: #242929;
+                font-weight: bold
             }
 
             .m-b-md {
@@ -105,32 +106,32 @@
                 padding-top: 5vh
             }
 
-        </style>
-    </head>
-    <body>
-        <div class="header">
-             <div class="links">
-                <a href="">Beranda</a>
-                <a href="">Tentang Aplikasi</a>
-                <a href="{{route('dashboard')}}">Login</a>
-            </div>
-        </div>
-        <div class="flex-center position-ref full-height mt-5">
-            <div class="content">
-                <div class="title m-b-md">
-                    <div class="text-uppercase">
-                        named entity recognition untuk ekstraksi informasi pada kutipan penulisan tugas akhir menggunakan pendekatan rule based
-                    </div>
-                </div>
 
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Cari Judul..." aria-label="Search"
-                    aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
+        </style>
+        @yield('css')
+    </head>
+    <body class="">
+        @include('apps.partials.navbar')
+        <div class="flex-center position-ref full-height mt-5">
+            <div class="content">   
+                @yield('content')
             </div>
         </div>
     </body>
+    @yield('modal')
 </html>
+
+<script src="{{{URL::asset('template/assets/libs/jquery/dist/jquery.min.js') }}}"></script>
+<script>
+    //ajax 
+    const ajaxRequest = (_method, _url, _data = {}) => {
+        return $.ajax({
+            type: _method,
+            url: _url,
+            data: _data,
+            dataType: "JSON",
+        });
+    }
+</script>
+
+@yield('js')

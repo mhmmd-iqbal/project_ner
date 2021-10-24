@@ -96,7 +96,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a
                                     class="dropdown-item"
-                                    href="{{route('home')}}"
+                                    href="{{route('index')}}"
                                     ><i
                                         class="
                                             fa fa-power-off
