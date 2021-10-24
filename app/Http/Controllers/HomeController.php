@@ -25,6 +25,5 @@ class HomeController extends Controller
     public function show(Request $request, Document $document)
     {
         return view('apps.pages.detail', compact('document'));
-        // return response($document->load('files'));
     }
 }

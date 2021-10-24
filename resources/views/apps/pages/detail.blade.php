@@ -76,7 +76,7 @@
 
                 let matchesAPPAStyle = e.converted_text.match(/\((.*?)\)/g);  // dari text menghasilkan array
                 let matchesIAAStyle = e.converted_text.match(/\([.*?]\)/g)
-                console.table(matchesAPPAStyle);
+                // console.table(matchesAPPAStyle);
                 
                 if(matchesAPPAStyle){
                     matchesAPPAStyle.map((list) => {
@@ -92,9 +92,9 @@
                             // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
                             if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
                             .match(/^[0-9]{4}$/)) {
-
-                                documentText = documentText.replace(`${list}`, `<span style="font-weight: bold">${list}</span>`)
-
+                                let find = list;
+                                let replace = new RegExp(find, 'g');
+                                documentText = documentText.replace(replace, `<span style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                 document.getElementById('list-data').innerHTML += `<div class="col-2">${list}</div>`
                                 document.getElementById('list-kutipan').innerHTML += 
                                     `
