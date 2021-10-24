@@ -2,8 +2,8 @@
         align-items: center;
         font-weight: bold;">
         <div class="links">
-        <a href="">Beranda</a>
-        <a href="">Tentang Aplikasi</a>
+        <a href="{{route('index')}}">Beranda</a>
+        <a href="#">Tentang Aplikasi</a>
         <a href="{{route('dashboard')}}">Login</a>
     </div>
 </div>
