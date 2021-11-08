@@ -70,9 +70,6 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                </div>
                 `
                 
                 result.files.map((e) => {
@@ -161,7 +158,7 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12 mb-2">
-                <a href="{{route('document.create')}}" class="btn btn-primary btn-sm">
+                <a href="{{route('document.create')}}" class="btn btn-primary ">
                     <i class="fa fa-plus"></i> Upload Dokumen
                 </a>
             </div>
@@ -194,8 +191,8 @@
                                             </td>
                                             <td>{{date('d-m-Y H:i:s', strtotime($document->created_at))}}</td>
                                             <td>
-                                                <button class="btn btn-danger btn-sm text-white " onclick="openModal(this)" data-target="delete" data-value="{{$document->id}}"><i class="fa fa-trash-o"></i> Delete</button>
-                                                <button class="btn btn-success btn-sm text-white "><i class="fa fa-pencil"></i> Update</button>
+                                                <button class="btn btn-success  text-white "><i class="mdi mdi-update"></i></button>
+                                                <button class="btn btn-danger  text-white " onclick="openModal(this)" data-target="delete" data-value="{{$document->id}}"><i class="mdi mdi-delete-empty"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

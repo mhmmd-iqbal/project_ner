@@ -19,6 +19,7 @@
 */
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 
@@ -42,6 +43,8 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 //     });
 // });
 
+Route::get('/document/show/{document}', [DocumentController::class, 'show'])->name('document.show');
+
 Route::prefix('admin')->middleware(['auth'])->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
@@ -50,4 +53,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function() {
     Route::get('/user/show/{user}', [UserController::class, 'show'])->name('user.show');
     Route::put('/user/update/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/destroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    Route::get('/document', [DocumentController::class, 'index'])->name('document.index');
+    Route::get('/document/create', [DocumentController::class, 'create'])->name('document.create');
+    Route::post('/document/store', [DocumentController::class, 'store'])->name('document.store');
+    Route::delete('/document/destroy/{document}', [DocumentController::class, 'destroy'])->name('document.destroy');
+
+    Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
+    Route::get('document-convertion/{file}', [DocumentConvertionController::class, '_invoke'])->name('convertion.file');
+
+
 });

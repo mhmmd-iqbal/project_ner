@@ -4,6 +4,31 @@
 
 @section('styles')
     <link rel="stylesheet" href="{!! asset('assets/dropzone/dist/dropzone.css') !!}">
+    <style>
+        .dz-default.dz-message {
+            padding: 15vmin;
+            border: 1px solid #e7fef0;
+            border-radius: 10px;
+            background: #e7fef0
+        }
+
+        .dropzone {
+            border: none;
+        }
+
+        .dz-image {
+            background: #e7fef0
+        } 
+
+        .dz-remove{
+            color: #e2a313
+        }
+        a.dz-remove:hover{
+            color: #e2a313;
+            text-decoration: none;
+            font-weight: bold
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -155,9 +180,9 @@
                                 <label for="">Upload Document Skripsi</label>
                             </div>
                         </form>
-                        <div class="row mt-2">
+                        <div class="row ">
                             <div class="col-12 text-right">
-                                <button class="btn btn-success btn-block" onclick="createData()">Upload Skripsi</button>
+                                <button class="btn btn-primary btn-block" onclick="createData()">Upload Skripsi</button>
                             </div>
                         </div>
                     </div>

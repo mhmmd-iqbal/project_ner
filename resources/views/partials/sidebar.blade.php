@@ -142,7 +142,7 @@
                             waves-effect waves-dark
                             sidebar-link
                         "
-                        {{-- href="{{route('document.index')}}" --}}
+                        href="{{route('document.index')}}"
                         aria-expanded="false"
                         ><i class="mdi mdi-book-multiple-variant"></i
                         ><span class="hide-menu">Document Skripsi</span></a

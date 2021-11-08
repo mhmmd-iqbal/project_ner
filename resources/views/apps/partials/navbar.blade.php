@@ -45,7 +45,6 @@
         <div class="">
             <div class="links ">
                 <a href="{{route('index')}}">Beranda</a>
-                <a href="#">Tentang Aplikasi</a>
                 <a href="{{route('signin')}}">Login</a>
             </div>
         </div>
