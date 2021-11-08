@@ -27,8 +27,8 @@ class HomeController extends Controller
         return view('apps.pages.detail', compact('document'));
     }
 
-    public function login()
+    public function signin()
     {
-        return view('apps.login');
+        return view('apps.signin');
     }
 }

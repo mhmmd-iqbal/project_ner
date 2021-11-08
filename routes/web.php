@@ -22,7 +22,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('index');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
-Route::get('/login', [HomeController::class, 'login'] )->name('login');
+Route::get('/signin', [HomeController::class, 'signin'] )->name('signin');
 Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 
 Route::prefix('admin')->group(function () {
