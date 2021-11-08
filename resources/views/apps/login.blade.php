@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{{URL::asset('login/images/icons/favicon.ico')}}}"/>
+	<link rel="icon" type="image/png" href="{{{URL::asset('template/assets/images/logo.png')}}}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{{URL::asset('login/vendor/bootstrap/css/bootstrap.min.css')}}}">
 <!--===============================================================================================-->
@@ -27,6 +27,12 @@
 	<link rel="stylesheet" type="text/css" href="{{{URL::asset('login/css/util.css')}}}">
 	<link rel="stylesheet" type="text/css" href="{{{URL::asset('login/css/main.css')}}}">
 <!--===============================================================================================-->
+
+<style>
+  .login100-form-avatar{
+    overflow: inherit;
+  }
+</style>
 </head>
 <body>
 	
@@ -34,11 +40,16 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
 				<form class="login100-form validate-form" action="{{route('dashboard')}}">
-					<span class="login100-form-title p-b-70">
+					{{-- <span class="login100-form-title p-b-70">
 						Welcome
-					</span>
+					</span> --}}
 					<span class="login100-form-avatar">
 						<img src="{{{URL::asset('template/assets/images/logo.png')}}}" alt="AVATAR">
+            <img
+                      src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
+                      alt="homepage"
+                      class="dark-logo"
+                  />
 					</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
