@@ -1,6 +1,6 @@
 <div class="header" style="">
      <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-        <div class="navbar-header" style="background: none" data-logobg="skin5">
+        <div class="navbar-header px-5" style="background: none" data-logobg="skin5">
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
