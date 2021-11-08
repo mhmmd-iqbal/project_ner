@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Providers\RouteServiceProvider;
 use App\Traits\DocxConversion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,11 +17,11 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        $input = $request->input();
+        $keyword = $request->input('keyword');
 
         $documents = Document::with('files')->get();
 
-        return view('apps.pages.search', compact('documents'));
+        return view('apps.pages.search', compact('documents', 'keyword'));
     }
 
     public function show(Request $request, Document $document)
@@ -27,8 +29,30 @@ class HomeController extends Controller
         return view('apps.pages.detail', compact('document'));
     }
 
-    public function signin()
+    public function signin(Request $request)
     {
         return view('apps.signin');
+    }
+
+    public function login(Request $request)
+    {
+        $validated = $request->validate([
+            'username'  => 'required',
+            'password'  => 'required'
+        ]);
+        $login = Auth::attempt(['username' => $validated['username'], 'password' => $validated['password']]);
+        if($login) {
+            return redirect()->route('dashboard');
+        }
+
+        return back()->with([
+            'error' => 'Username atau password salah',
+        ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('index');
     }
 }

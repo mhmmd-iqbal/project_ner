@@ -13,6 +13,9 @@
 <script src="{{{URL::asset('template/dist/js/sidebarmenu.js') }}}"></script>
 <!--Custom JavaScript -->
 <script src="{{{URL::asset('template/dist/js/custom.js') }}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <script>
 const ajax = (method, url, data = {} ) => {
     return $.ajax({

@@ -2,6 +2,20 @@
 
 @section('title', 'DATA USER')
 
+@section('scripts')
+<script>
+    @if(Session::has('message'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.success("{{ session('message') }}");
+    @endif
+
+</script>
+@endsection
+
 @section('content')
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -40,7 +54,7 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12 mb-2">
-                <a href="{{route('user.create')}}" class="btn btn-primary btn-sm">
+                <a href="{{route('user.create')}}" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah User
                 </a>
             </div>
@@ -55,8 +69,8 @@
                                         <th>Nama</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Hak Akses</th>
                                         <th>Dibuat Pada</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -69,8 +83,11 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->username}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->role}}</td>
                                             <td>{{date('d-m-Y H:i:s', strtotime($user->created_at))}}</td>
+                                            <td>
+                                                <a href="{{route('user.show', $user->id)}}" class="btn btn-success text-white"><i class="mdi mdi-update"></i></a>
+                                                <button class="btn btn-danger text-white"><i class="mdi mdi-delete-empty"></i></button>
+                                            </td>
                                         </tr>
                                     </tbody>                                    
                                 @endforeach

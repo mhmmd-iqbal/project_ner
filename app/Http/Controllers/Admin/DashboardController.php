@@ -15,7 +15,7 @@ class DashboardController extends Controller
 {
 
     use DocxConversion;
-    public function __invoke()
+    public function index()
     {
         $documents = Document::get();
         return view('pages.dashboard.index', compact('documents'));

@@ -18,7 +18,7 @@
                     >
                         <div class="user-pic">
                             <img
-                                src="{{{ URL::asset('template/assets/images/users/1.jpg') }}}"
+                                src="{{Auth::user()->image ?? URL::asset('template/assets/images/users/1.jpg')}}"
                                 alt="users"
                                 class="rounded-circle"
                                 width="40"
@@ -41,14 +41,14 @@
                                         font-medium
                                     "
                                 >
-                                    Steave Jobs
-                                    <i class="fa fa-angle-down"></i>
+                                    {{Auth::user()->name}}
+                                    {{-- <i class="fa fa-angle-down"></i> --}}
                                 </h5>
                                 <span class="op-5 user-email"
-                                    >varun@gmail.com</span
+                                    >{{Auth::user()->email}}</span
                                 >
                             </a>
-                            <div
+                            {{-- <div
                                 class="
                                     dropdown-menu dropdown-menu-end
                                 "
@@ -62,25 +62,7 @@
                                     ></i>
                                     My Profile</a
                                 >
-                                <a
-                                    class="dropdown-item"
-                                    href="javascript:void(0)"
-                                    ><i
-                                        class="
-                                            ti-wallet
-                                            m-r-5 m-l-5
-                                        "
-                                    ></i>
-                                    My Balance</a
-                                >
-                                <a
-                                    class="dropdown-item"
-                                    href="javascript:void(0)"
-                                    ><i
-                                        class="ti-email m-r-5 m-l-5"
-                                    ></i>
-                                    Inbox</a
-                                >
+                                
                                 <div class="dropdown-divider"></div>
                                 <a
                                     class="dropdown-item"
@@ -105,7 +87,7 @@
                                     ></i>
                                     Logout</a
                                 >
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- End User Profile-->
@@ -125,12 +107,14 @@
                         ><span class="hide-menu">Dashboard</span></a
                     >
                 </li>
+                
                 <li class="sidebar-item">
                     <a
                         class="
                             sidebar-link
                             waves-effect waves-dark
                             sidebar-link
+                            {{(request()->is('user*')) ? 'active' : ''}}
                         "
                         href="{{route('user.index')}}"
                         aria-expanded="false"
@@ -158,7 +142,7 @@
                             waves-effect waves-dark
                             sidebar-link
                         "
-                        href="{{route('document.index')}}"
+                        {{-- href="{{route('document.index')}}" --}}
                         aria-expanded="false"
                         ><i class="mdi mdi-book-multiple-variant"></i
                         ><span class="hide-menu">Document Skripsi</span></a

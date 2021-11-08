@@ -113,7 +113,7 @@
                         aria-expanded="false"
                     >
                         <img
-                            src="{{{URL::asset('template/assets/images/users/1.jpg')}}}"
+                            src="{{Auth::user()->image ?? URL::asset('template/assets/images/users/1.jpg')}}"
                             alt="user"
                             class="rounded-circle"
                             width="31"
@@ -133,17 +133,28 @@
                             ><i class="ti-user m-r-5 m-l-5"></i> My
                             Profile</a
                         >
+
                         <a
                             class="dropdown-item"
                             href="javascript:void(0)"
-                            ><i class="ti-wallet m-r-5 m-l-5"></i>
-                            My Balance</a
+                            ><i
+                                class="
+                                    ti-settings
+                                    m-r-5 m-l-5
+                                "
+                            ></i>
+                            Account Setting</a
                         >
                         <a
                             class="dropdown-item"
-                            href="javascript:void(0)"
-                            ><i class="ti-email m-r-5 m-l-5"></i>
-                            Inbox</a
+                            href="{{route('logout')}}"
+                            ><i
+                                class="
+                                    fa fa-power-off
+                                    m-r-5 m-l-5
+                                "
+                            ></i>
+                            Logout</a
                         >
                     </ul>
                 </li>

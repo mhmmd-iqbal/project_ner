@@ -11,7 +11,7 @@
 <form action="{{route('search')}}" method="POST">
     @csrf
     <div class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Cari Judul..." aria-label="Search"
+        <input type="search" class="form-control rounded" name="keyword" placeholder="Cari Judul..." aria-label="Search"
         aria-describedby="search-addon" />
         <button class="input-group-text btn-primary border-0" id="search-addon">
             <i class="fas fa-search"></i>

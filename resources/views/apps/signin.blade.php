@@ -28,6 +28,8 @@
 	<link rel="stylesheet" type="text/css" href="{{{URL::asset('login/css/main.css')}}}">
 <!--===============================================================================================-->
 
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 <style>
   .login100-form-avatar{
     overflow: inherit;
@@ -39,17 +41,18 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form" action="{{route('dashboard')}}">
+				<form class="login100-form validate-form" method="POST" action="{{route('login')}}">
+					@csrf
 					{{-- <span class="login100-form-title p-b-70">
 						Welcome
 					</span> --}}
 					<span class="login100-form-avatar">
 						<img src="{{{URL::asset('template/assets/images/logo.png')}}}" alt="AVATAR">
-            <img
-                src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
-                alt="homepage"
-                class="dark-logo"
-            />
+					<img
+						src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
+						alt="homepage"
+						class="dark-logo"
+					/>
 					</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
@@ -58,7 +61,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
@@ -68,7 +71,7 @@
 						</button>
 					</div>
 
-					<ul class="login-more p-t-190">
+					{{-- <ul class="login-more p-t-190">
 						<li class="m-b-8">
 							<span class="txt1">
 								Forgot
@@ -88,7 +91,7 @@
 								Sign up
 							</a>
 						</li>
-					</ul>
+					</ul> --}}
 				</form>
 			</div>
 		</div>
@@ -113,6 +116,20 @@
 	<script src="{{{URL::asset('login/vendor/countdowntime/countdowntime.js')}}}"></script>
 <!--===============================================================================================-->
 	<script src="{{{URL::asset('login/js/main.js')}}}"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+	<script>
+
+		@if(Session::has('error'))
+			toastr.options =
+			{
+				"closeButton" : true,
+				"progressBar" : true
+			}
+			toastr.error("{{ session('error') }}");
+		@endif
+	</script>
 
 </body>
 </html>

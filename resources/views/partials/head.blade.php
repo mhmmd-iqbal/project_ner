@@ -12,4 +12,5 @@
 />
 <meta name="robots" content="noindex,nofollow" />
 <meta name="_token" content="{{csrf_token()}}" />
+
 <title>@yield('title')</title>

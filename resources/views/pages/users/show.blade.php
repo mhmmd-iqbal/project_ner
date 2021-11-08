@@ -154,7 +154,7 @@
         <div class="row">
              <div class="col-sm-4 col-md-4 col-lg-4 d-flex justify-content-center">
                     <div class="profile" style="width:200px; height:200px;">
-                        <img src="{{url('assets/icon/male.png')}}" alt="Avatar" class="image" id="image" style="width:100%; border-radius: 50%;">
+                        <img src="{{$user->image}}" alt="Avatar" class="image" id="image" style="width:100%; border-radius: 50%;">
                         <div class="middle">
                             <div class="text font-weight-bold" onclick="openModal(this)">Change Image</div>
                         </div>
@@ -163,19 +163,20 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('user.store')}}" method="POST">
+                        <form action="{{route('user.update', $user->id)}}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="col-12 form-group">
                                 <label for="">Nama User</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}">
                             </div>
                             <div class="col-12 form-group">
                                 <label for="">Username</label>
-                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}">
+                                <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" readonly value="{{ $user->username }}">
                             </div>
                             <div class="col-12 form-group">
                                 <label for="">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}">
                             </div>
                             <div class="col-12 form-group">
                                 <label class="form-control-label">Password</label>
@@ -186,7 +187,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <input type="hidden" name="image" class="form-control" value="{{url('assets/icon/male.png')}}">
+                            <input type="hidden" name="image" class="form-control" value="{{$user->image}}">
 
                             <div class="col-12 form-group mt-2">
                                 <button class="btn btn-primary btn-block" onclick="createData()">Simpan Data</button>
