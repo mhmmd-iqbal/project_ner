@@ -46,10 +46,10 @@
 					<span class="login100-form-avatar">
 						<img src="{{{URL::asset('template/assets/images/logo.png')}}}" alt="AVATAR">
             <img
-                      src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
-                      alt="homepage"
-                      class="dark-logo"
-                  />
+                src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
+                alt="homepage"
+                class="dark-logo"
+            />
 					</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
