@@ -13,5 +13,17 @@
 <script src="{{{URL::asset('template/dist/js/sidebarmenu.js') }}}"></script>
 <!--Custom JavaScript -->
 <script src="{{{URL::asset('template/dist/js/custom.js') }}}"></script>
-
+<script>
+const ajax = (method, url, data = {} ) => {
+    return $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        type: method,
+        url: url,
+        data: data,
+        dataType: "JSON"
+    });
+} 
+</script>
 @yield('scripts')

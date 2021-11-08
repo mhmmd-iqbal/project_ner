@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('index');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/login', [HomeController::class, 'login'] )->name('login');
 Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 
 Route::prefix('admin')->group(function () {
@@ -30,7 +31,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('document', DocumentController::class);
         Route::resource('documentFile', DocumentFileController::class);
         Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
-        Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
+        Route::post('delete/file', 'DocumentController@fileDestroy')->name('delete.file');
         Route::resource('user', UserController::class);
         Route::resource('quotation', QuotationController::class);
     });

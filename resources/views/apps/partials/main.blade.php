@@ -6,6 +6,13 @@
 
         <title>@yield('title')</title>
 
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="{{{URL::asset('template/assets/images/logo.png') }}}"
+        />
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link href="{{{URL::asset('template/dist/css/style.min.css') }}}" rel="stylesheet" />
@@ -52,7 +59,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -62,7 +69,7 @@
             }
 
             .links > a:hover {
-                color: #242929;
+                color: #e2a313;
                 font-weight: bold
             }
 
@@ -103,10 +110,28 @@
 
             .header {
                 text-align: right;
-                padding-top: 5vh
+                padding-top: 5vh;
+                background: #0b6631;
+                padding-bottom: 2em;
+                align-items: center;
+                font-weight: bold;
             }
 
+            .primary-1 {
+                color: #0b9444
+            }
 
+            .bg-primary-1 {
+                background-color: #0b9444;
+            }
+
+            .primary-2 {
+                color: #e2a313
+            }
+
+            .bg-primary-2 {
+                background-color: #e2a313;
+            }
         </style>
         @yield('css')
     </head>

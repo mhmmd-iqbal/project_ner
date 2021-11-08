@@ -1,5 +1,7 @@
 @extends('apps.partials.main')
 
+@section('title', 'SEARCH')
+
 @section('css')
 <style>
     .content-search {

@@ -1,5 +1,7 @@
 @extends('apps.partials.main')
 
+@section('title', 'DETAIL')    
+
 @section('css')
 <style>
     .scroll {

@@ -13,15 +13,15 @@ class CreateQuotationFormatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotation_formats', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->text('formatted')->nullable();
-            $table->text('fixed_string')->nullable();
-            $table->boolean('name')->default(false);
-            $table->boolean('punctuation')->default(false);
-            $table->softDeletes();
-            $table->timestamps();
-        });
+        // Schema::create('quotation_formats', function (Blueprint $table) {
+            // $table->bigIncrements('id');
+            // $table->text('formatted')->nullable();
+            // $table->text('fixed_string')->nullable();
+            // $table->boolean('name')->default(false);
+            // $table->boolean('punctuation')->default(false);
+            // $table->softDeletes();
+            // $table->timestamps();
+        // });
     }
 
     /**
@@ -31,6 +31,6 @@ class CreateQuotationFormatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotation_formats');
+        // Schema::dropIfExists('quotation_formats');
     }
 }

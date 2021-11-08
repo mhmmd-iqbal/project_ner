@@ -25,7 +25,7 @@ class AddConvertedTextOnDocumentFiles extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('document_files', function (Blueprint $table) {
             $table->dropColumn('converted_text');
         });
     }

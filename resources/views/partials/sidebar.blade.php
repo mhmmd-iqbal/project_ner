@@ -138,7 +138,7 @@
                         ><span class="hide-menu">Data User</span></a
                     >
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a
                         class="
                             sidebar-link
@@ -150,7 +150,7 @@
                         ><i class="mdi mdi-format-quote"></i
                         ><span class="hide-menu">Data Model Kutipan</span></a
                     >
-                </li>
+                </li> --}}
                 <li class="sidebar-item">
                     <a
                         class="

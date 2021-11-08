@@ -1,6 +1,6 @@
-<header class="topbar" data-navbarbg="skin5">
+<header class="topbar" style="background: #0b6631" data-navbarbg="skin5" >
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-        <div class="navbar-header" data-logobg="skin5">
+        <div class="navbar-header" style="background: none" data-logobg="skin5">
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
@@ -10,15 +10,17 @@
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
                     <img
-                        src="{{{URL::asset('template/assets/images/logo-icon.png')}}}"
+                        src="{{{URL::asset('template/assets/images/logo.png')}}}"
                         alt="homepage"
                         class="dark-logo"
+                        width="auto" height="50"
                     />
                     <!-- Light Logo icon -->
                     <img
-                        src="{{{URL::asset('template/assets/images/logo-icon.png')}}}"
+                        src="{{{URL::asset('template/assets/images/logo.png')}}}"
                         alt="homepage"
                         class="light-logo"
+                        width="auto" height="50"
                     />
                 </b>
                 <!--End Logo icon -->
@@ -32,9 +34,11 @@
                     />
                     <!-- Light Logo text -->
                     <img
-                        src="{{{URL::asset('template/assets/images/logo-light-text.png')}}}"
+                        src="{{{URL::asset('template/assets/images/logo-text.png')}}}"
                         class="light-logo"
                         alt="homepage"
+                        height="50"
+
                     />
                 </span>
             </a>
@@ -59,6 +63,7 @@
             class="navbar-collapse collapse"
             id="navbarSupportedContent"
             data-navbarbg="skin5"
+            style="background: none"
         >
             <!-- ============================================================== -->
             <!-- toggle and nav items -->

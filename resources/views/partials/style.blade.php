@@ -7,7 +7,7 @@
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href="{{{URL::asset('template/assets/images/favicon.png') }}}"
+    href="{{{URL::asset('template/assets/images/logo.png') }}}"
 />
 <!-- Custom CSS -->
 <link href="{{{URL::asset('template/dist/css/style.min.css') }}}" rel="stylesheet" />
@@ -17,5 +17,26 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style>
+.primary-1 {
+    color: #0b9444
+}
 
+.bg-primary-1 {
+    background-color: #0b9444;
+}
+
+.primary-2 {
+    color: #e2a313
+}
+
+.bg-primary-2 {
+    background-color: #e2a313;
+}
+
+.btn.btn-primary {
+    background: #0b9444;
+    border: #0b9444;
+}
+</style>
 @yield('styles')

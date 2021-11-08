@@ -1,5 +1,7 @@
 @extends('apps.partials.main')
 
+@section('title', 'DASHBOARD')    
+
 @section('content')
 <div class="title m-b-md">
     <div class="text-uppercase">

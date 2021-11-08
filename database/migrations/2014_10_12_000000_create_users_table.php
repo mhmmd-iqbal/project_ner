@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('username', 20)->unique();
-            $table->enum('role', ['admin', 'user'])->default('admin');
-            $table->timestamp('email_`verified_at')->nullable();
+            $table->string('photo', 255)->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -30,7 +29,6 @@ class CreateUsersTable extends Migration
             'name'      => 'M iqbal',
             'email'     => 'admin@admin.com',
             'username'  => 'admin',
-            'role'      => 'admin',
             'password'  => bcrypt('admin')
         ]);
     }

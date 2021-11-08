@@ -26,4 +26,9 @@ class HomeController extends Controller
     {
         return view('apps.pages.detail', compact('document'));
     }
+
+    public function login()
+    {
+        return view('apps.login');
+    }
 }

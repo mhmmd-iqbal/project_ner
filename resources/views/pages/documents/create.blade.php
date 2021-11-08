@@ -26,24 +26,44 @@
         {
             var name = file.upload.filename;
             console.table(file, name);
-            $.ajax({
-                headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        },
-                type: 'POST',
-                url: '{{ route("delete.file") }}',
-                data: {filename: name},
-                success: function (data){
-                    const index = files.indexOf(data);
-                    if (index !== -1) files.splice(index, 1);
-                    console.log("File has been successfully removed!!", data);
-                },
-                error: function(e) {
-                    console.log(e);
-                }});
-                var fileRef;
-                return (fileRef = file.previewElement) != null ? 
-                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            let method  = 'POST'
+            let url     = '{{ route("delete.file") }}'
+            let data    = {filename: name}
+
+            ajax(
+                method,
+                url,
+                data
+            ).then((result) => {
+                const index = files.indexOf(data);
+                if (index !== -1) files.splice(index, 1);
+                console.log("File has been successfully removed!!", data);
+            }).catch((err) => {
+                
+            });
+
+            var fileRef;
+            return (fileRef = file.previewElement) != null ? 
+            fileRef.parentNode.removeChild(file.previewElement) : void 0;
+
+            // $.ajax({
+            //     headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            //             },
+            //     type: 'POST',
+            //     url: '{{ route("delete.file") }}',
+            //     data: {filename: name},
+            //     success: function (data){
+            //         const index = files.indexOf(data);
+            //         if (index !== -1) files.splice(index, 1);
+            //         console.log("File has been successfully removed!!", data);
+            //     },
+            //     error: function(e) {
+            //         console.log(e);
+            //     }});
+            //     var fileRef;
+            //     return (fileRef = file.previewElement) != null ? 
+            //     fileRef.parentNode.removeChild(file.previewElement) : void 0;
         },
 
         success: function(file, response) 
@@ -60,21 +80,22 @@
     };
 
     const createData = () => {
-        $.ajax({
-            type: "POST",
-            url: "{{route('document.store')}}",
-            data: {
-                "_token"    : "{{ csrf_token() }}",
-                'creator'   : $('input[name=creator]').val(),
-                'title'     : $('input[name=title]').val(),
-                'files'     : files
+        let method = 'POST'
+        let url = "{{route('document.store')}}"
+        let data = {
+            'creator'   : $('input[name=creator]').val(),
+            'title'     : $('input[name=title]').val(),
+            'files'     : files
+        }
 
-            },
-            dataType: "JSON",
-            success: function (response) {
-                console.table(response);
-                return window.location.href = "{{route('document.index')}}"
-            }
+        ajax(
+            method,
+            url,
+            data
+        ).then((result) => {
+            return window.location.href = "{{route('document.index')}}"
+        }).catch((err) => {
+            
         });
     }
 </script>
