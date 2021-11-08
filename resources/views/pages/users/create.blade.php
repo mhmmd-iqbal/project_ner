@@ -77,18 +77,13 @@
 @endsection
 
 @section('scripts')
-    <script>
-    $(document).on('click', '.pick-image', function(){
-        const image = $(this).attr('picture');
-        document.getElementById('profile-picture').value = image
-        changeImage(image)
-    });
+<script>
 
-    function changeImage(a) {
+    const changeImage = (a) => {
         document.getElementById("image").src = a
     }
 
-    function showPassword() {
+    const showPassword = () => {
         var x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
@@ -97,7 +92,17 @@
         }
     }
 
-    </script>
+    const openModal = () => {
+        $('#imageModal').modal('toggle')
+    }
+
+    const pickImage = (e) => {
+        let {image} = $(e).data()
+        $('#imageModal').modal('toggle')
+        changeImage(image)
+    }
+
+</script>
 @endsection
 @section('content')
     <!-- ============================================================== -->
@@ -140,14 +145,14 @@
                     <div class="profile" style="width:200px; height:200px;">
                         <img src="{{url('assets/icon/male.png')}}" alt="Avatar" class="image" id="image" style="width:100%; border-radius: 50%;">
                         <div class="middle">
-                            <div class="text font-weight-bold" data-toggle="modal" data-target="#imageModal">Change Image</div>
+                            <div class="text font-weight-bold" onclick="openModal(this)">Change Image</div>
                         </div>
                     </div>
                 </div>
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('user.store')}}" method="POST">
+                        {{-- <form action="" method=""> --}}
                             @csrf
                             <div class="col-12 form-group">
                                 <label for="">Nama User</label>
@@ -161,6 +166,15 @@
                                 <label for="">Email</label>
                                 <input type="text" class="form-control" name="email">
                             </div>
+                            <div class="col-12 form-group">
+                                <label class="form-control-label">Password</label>
+                                <div class="input-group rounded">
+                                    <input type="password" id="password" class="form-control" name="password">
+                                    <button class="input-group-text  btn-primary border-0"  onclick="showPassword()" id="search-addon">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
                             {{-- <div class="col-12 form-group">
                                 <label for="">Hak Akses</label>
                                 <select name="role" id="" class="form-control">
@@ -171,9 +185,9 @@
                             </div> --}}
 
                             <div class="col-12 form-group mt-2">
-                                <button class="btn btn-success btn-block" onclick="createData()">Simpan Data</button>
+                                <button class="btn btn-primary btn-block" onclick="createData()">Simpan Data</button>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>
@@ -194,21 +208,18 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="imageModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="d-flex justify-content-between">
+                <div class=" modal-header d-flex justify-content-between">
                     <div class="pl-3 pt-3 h6">Pilih Foto</div>
-                    <button type="button" class="close text-right pt-2 pr-3" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="row d-flex justify-content-center">
                         <div class="col-sm-4 col-md-4 col-lg-4 p-3">
-                            <div class="profile pick-image" picture="{{url('assets/icon/male.png')}}" style="width:100%; height:100%;" data-dismiss="modal">
+                            <div class="profile" onclick="pickImage(this)" data-image="{{url('assets/icon/male.png')}}" style="width:100%; height:100%;">
                                 <img src="{{url('assets/icon/male.png')}}" alt="Avatar" class="image data-image" style="width:100%; border-radius: 50%;">
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-4 col-lg-4 p-3">
-                            <div class="profile pick-image" picture="{{url('assets/icon/female.png')}}" style="width:100%; height:100%;" data-dismiss="modal">
+                            <div class="profile" onclick="pickImage(this)" data-image="{{url('assets/icon/female.png')}}" style="width:100%; height:100%;">
                                 <img src="{{url('assets/icon/female.png')}}" alt="Avatar" class="image data-image" style="width: 100%; border-radius: 50%;">
                             </div>
                         </div>
