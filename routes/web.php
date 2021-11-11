@@ -20,6 +20,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 
@@ -62,5 +63,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function() {
     Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
     Route::get('document-convertion/{file}', [DocumentConvertionController::class, '_invoke'])->name('convertion.file');
 
-
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 });

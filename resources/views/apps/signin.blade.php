@@ -31,16 +31,26 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <style>
-  .login100-form-avatar{
-    overflow: inherit;
-  }
+  	.login100-form-avatar{
+    	overflow: inherit;
+  	}
+
+  	.login100-form-btn.back{
+		background-color: #b84646;     
+		-webkit-box-shadow: 0 10px 30px 0px rgb(184 70 70 / 50%)
+	}
+  	.login100-form-btn.back:hover{
+		background-color: #333333;
+		-webkit-box-shadow: 0 10px 30px 0px rgb(51 51 51 / 50%);
+	}
+
 </style>
 </head>
 <body>
 	
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100 p-t-85 p-b-20">
+			<div class="wrap-login100 p-t-20 p-b-20">
 				<form class="login100-form validate-form" method="POST" action="{{route('login')}}">
 					@csrf
 					{{-- <span class="login100-form-title p-b-70">
@@ -70,29 +80,14 @@
 							Login
 						</button>
 					</div>
-
-					{{-- <ul class="login-more p-t-190">
-						<li class="m-b-8">
-							<span class="txt1">
-								Forgot
-							</span>
-
-							<a href="#" class="txt2">
-								Username / Password?
-							</a>
-						</li>
-
-						<li>
-							<span class="txt1">
-								Don’t have an account?
-							</span>
-
-							<a href="#" class="txt2">
-								Sign up
-							</a>
-						</li>
-					</ul> --}}
 				</form>
+				<div class="container-login100-form-btn m-t-20">
+					<button class="login100-form-btn back" 
+						onclick="back()"
+						style="">
+						Kembali
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -129,6 +124,10 @@
 			}
 			toastr.error("{{ session('error') }}");
 		@endif
+
+		const back = () => {
+			window.location.href = "{{route('index')}}"
+		}
 	</script>
 
 </body>

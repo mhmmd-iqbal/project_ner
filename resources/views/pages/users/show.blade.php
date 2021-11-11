@@ -187,6 +187,11 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="col-12 form-group">
+                                <div class="alert alert-warning border-0">
+                                    <span>Kosongkan password jika tidak ingin merubah password</span>
+                                </div>
+                            </div>
                             <input type="hidden" name="image" class="form-control" value="{{$user->image}}">
 
                             <div class="col-12 form-group mt-2">
