@@ -60,7 +60,16 @@
         <div class="card">
             <div class="card-header"><h4>Data Kutipan</h4></div>
             <div class="card-body">
-                <div id="list-kutipan"></div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kutipan</th>
+                            <th>Kalimat Kutipan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-kutipan"></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -104,15 +113,19 @@
                                 // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
                                 if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
                                 .match(/^[0-9]{4}$/)) {
-
-                                    // if(docs == list) {
-                                    //     // docs = documents[index-1]
-                                    //     console.log('ok')
-                                    // }
-
-                                    console.log(docs, list)
                                     let find = list;
                                     let replace = new RegExp(find, 'g');
+                                    let sentences = docs
+
+                                    if(
+                                        docs.replace(/\s/g,'') == string.replace(/\s/g,'')
+                                        )
+                                    {
+                                        sentences = documents[index-1]   
+                                    }
+
+                                    countKutipan++
+
                                     documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                     document.getElementById('list-data').innerHTML += 
                                     `
@@ -120,16 +133,12 @@
                                     `
                                     document.getElementById('list-kutipan').innerHTML += 
                                         `
-                                        <div class="row">
-                                            <div class="col-3 text-left" style="border: 1px solid black; padding: 10px">
-                                                ${list}
-                                            </div>
-                                            <div class="col-9 text-left" style="border: 1px solid black; text-align: left; padding: 10px">
-                                                ${docs}
-                                            </div>
-                                        </div>
+                                        <tr>
+                                            <td>${countKutipan}</td>
+                                            <td>${list}</td>
+                                            <td style="text-align: left">${sentences}</td>
+                                        </tr>
                                         `
-                                    countKutipan++
                                 }
                             }
                         })
