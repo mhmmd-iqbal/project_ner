@@ -82,53 +82,121 @@
 
                 documentText = e.converted_text
 
-                let matchesAPPAStyle = e.converted_text.match(/\((.*?)\)/g);  // dari text menghasilkan array
-                let matchesIAAStyle = e.converted_text.match(/\([.*?]\)/g)
-                // console.table(matchesAPPAStyle);
-                
-                if(matchesAPPAStyle){
-                    matchesAPPAStyle.map((list) => {
-                        // menghapus semua spasi
-                        string = (list)
-                            .replace(/ /g,'')
-                            .split(":")
-                            .pop()
+                let documents = documentText.split('.')
+                // documents.pop();    
+                // var documnets = documents.join(".");
+                // documents.map((doc, index) => {
+
+                // })
+                $.each(documents, function (index, docs) { 
+                    let matchesAPPAStyle = docs.match(/\((.*?)\)/g);  // dari text menghasilkan array   
+                    if(matchesAPPAStyle){
+                        matchesAPPAStyle.map((list) => {
+                            // menghapus semua spasi
+                            string = (list)
+                                .replace(/ /g,'')
+                                .split(":")
+                                .pop()
 
 
-                        // cek apakah ada tanda comma
-                        if(string.indexOf(',') != -1 ) {
-                            // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
-                            if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
-                            .match(/^[0-9]{4}$/)) {
-                                let find = list;
-                                let replace = new RegExp(find, 'g');
-                                documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
-                                document.getElementById('list-data').innerHTML += 
-                                `
-                                    <div class="col-2">${list}</div>
-                                `
-                                document.getElementById('list-kutipan').innerHTML += 
+                            // cek apakah ada tanda comma
+                            if(string.indexOf(',') != -1 ) {
+                                // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
+                                if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
+                                .match(/^[0-9]{4}$/)) {
+
+                                    // if(docs == list) {
+                                    //     // docs = documents[index-1]
+                                    //     console.log('ok')
+                                    // }
+
+                                    console.log(docs, list)
+                                    let find = list;
+                                    let replace = new RegExp(find, 'g');
+                                    documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+                                    document.getElementById('list-data').innerHTML += 
                                     `
-                                    <div class="row">
-                                        <div class="col-3 text-left" style="border: 1px solid black;">
-                                            ${list}
-                                        </div>
-                                        <div class="col-9 text-left" style="border: 1px solid black;">
-                                            lorem ipsum
-                                        </div>
-                                    </div>
+                                        <div class="col-2">${list}</div>
                                     `
-                                countKutipan++
+                                    document.getElementById('list-kutipan').innerHTML += 
+                                        `
+                                        <div class="row">
+                                            <div class="col-3 text-left" style="border: 1px solid black; padding: 10px">
+                                                ${list}
+                                            </div>
+                                            <div class="col-9 text-left" style="border: 1px solid black; text-align: left; padding: 10px">
+                                                ${docs}
+                                            </div>
+                                        </div>
+                                        `
+                                    countKutipan++
+                                }
                             }
-                        }
-                    })
-                }
+                        })
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //     let matchesAPPAStyle = e.converted_text.match(/\((.*?)\)/g);  // dari text menghasilkan array
+            //     let matchesIAAStyle = e.converted_text.match(/\([.*?]\)/g)
+            //     // console.table(matchesAPPAStyle);
+                
+            //     if(matchesAPPAStyle){
+            //         matchesAPPAStyle.map((list) => {
+            //             // menghapus semua spasi
+            //             string = (list)
+            //                 .replace(/ /g,'')
+            //                 .split(":")
+            //                 .pop()
+
+
+            //             // cek apakah ada tanda comma
+            //             if(string.indexOf(',') != -1 ) {
+            //                 // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
+            //                 if(string.match(/\d+/) !== null  && (string.match(/\d+/)[0])
+            //                 .match(/^[0-9]{4}$/)) {
+            //                     let find = list;
+            //                     let replace = new RegExp(find, 'g');
+            //                     documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+            //                     document.getElementById('list-data').innerHTML += 
+            //                     `
+            //                         <div class="col-2">${list}</div>
+            //                     `
+            //                     document.getElementById('list-kutipan').innerHTML += 
+            //                         `
+            //                         <div class="row">
+            //                             <div class="col-3 text-left" style="border: 1px solid black;">
+            //                                 ${list}
+            //                             </div>
+            //                             <div class="col-9 text-left" style="border: 1px solid black;">
+            //                                 lorem ipsum
+            //                             </div>
+            //                         </div>
+            //                         `
+            //                     countKutipan++
+            //                 }
+            //             }
+            //         })
+            //     }
 
                 document.getElementById('load-content').innerHTML += 
                     `<div class="p-2 mt-1">${documentText}</div>`
             })
 
-            // console.log(countKutipan)
+            // // console.log(countKutipan)
             $('#count-kutipan').html(`${countKutipan} Kutipan Ditemukan`)
         })
         
