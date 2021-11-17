@@ -20,7 +20,17 @@ class HomeController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        $documents = Document::with('files')->get();
+        
+        if(!is_null($keyword) && $keyword !== '') {
+            $documents = Document::with('files');
+            $documents = $documents->where('title', 'LIKE', '%' . $keyword . '%')
+            ->orWhereHas('files', function($query) use ($keyword){
+                $query->where('converted_text', 'LIKE', '%' . $keyword . '%');
+            });
+            $documents = $documents->get();
+        } else {
+            $documents = [];
+        }
 
         return view('apps.pages.search', compact('documents', 'keyword'));
     }
