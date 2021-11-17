@@ -1,6 +1,6 @@
 @extends('partials.main')
 
-@section('title', 'BLANK PAGE')    
+@section('title', 'PROFILE')    
 
 @section('scripts')
 <script>

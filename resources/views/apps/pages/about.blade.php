@@ -1,6 +1,6 @@
 @extends('apps.partials.main')
 
-@section('title', 'SEARCH')
+@section('title', 'ABOUT')
 
 @section('css')
 <style>
