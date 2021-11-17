@@ -5,7 +5,7 @@
 @section('css')
 <style>
     .scroll {
-        max-height: 50vmin;
+        max-height: 90vmin;
         overflow-y: auto;
     }
     
@@ -47,6 +47,11 @@
         <div class="card">
             <div class="card-header"><h4>List Ditemukan</h4> </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-12 mb-5" id="count-kutipan" style="font-weight: bold">
+                        0 Kutipan Ditemukan
+                    </div>
+                </div>
                 <div class="row" id="list-data"></div>
             </div>
         </div>
@@ -70,6 +75,7 @@
         ajaxRequest('GET', url)
         .then(data => {
             let documentText = ''
+            let countKutipan = 0;
             data.files.map((e) => {
                 id = e.id
                 url = "{{route('convertion.file', 'dataID')}}".replace('dataID', id)
@@ -96,8 +102,11 @@
                             .match(/^[0-9]{4}$/)) {
                                 let find = list;
                                 let replace = new RegExp(find, 'g');
-                                documentText = documentText.replace(replace, `<span style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
-                                document.getElementById('list-data').innerHTML += `<div class="col-2">${list}</div>`
+                                documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+                                document.getElementById('list-data').innerHTML += 
+                                `
+                                    <div class="col-2">${list}</div>
+                                `
                                 document.getElementById('list-kutipan').innerHTML += 
                                     `
                                     <div class="row">
@@ -109,6 +118,7 @@
                                         </div>
                                     </div>
                                     `
+                                countKutipan++
                             }
                         }
                     })
@@ -117,6 +127,9 @@
                 document.getElementById('load-content').innerHTML += 
                     `<div class="p-2 mt-1">${documentText}</div>`
             })
+
+            // console.log(countKutipan)
+            $('#count-kutipan').html(`${countKutipan} Kutipan Ditemukan`)
         })
         
     });
