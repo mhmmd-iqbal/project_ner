@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Document;
 use App\Providers\RouteServiceProvider;
 use App\Traits\DocxConversion;
@@ -22,6 +23,12 @@ class HomeController extends Controller
         $documents = Document::with('files')->get();
 
         return view('apps.pages.search', compact('documents', 'keyword'));
+    }
+
+    public function about()
+    {
+        $about = About::latest('created_at')->first();
+        return view('apps.pages.about', compact('about'));   
     }
 
     public function show(Request $request, Document $document)

@@ -18,6 +18,7 @@
 |
 */
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -26,23 +27,12 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('index');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 
 Route::get('/signin', [HomeController::class, 'signin'] )->name('signin');
 Route::post('/signin', [HomeController::class, 'login'] )->name('login');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
-
-// Route::prefix('admin')->group(function () {
-//     Route::namespace('Admin')->group(function() {
-//         Route::get('/', DashboardController::class)->name('dashboard');
-//         Route::resource('document', DocumentController::class);
-//         Route::resource('documentFile', DocumentFileController::class);
-//         Route::get('document-convertion/{file}', DocumentConvertionController::class)->name('convertion.file');
-//         Route::post('delete/file', 'DocumentController@fileDestroy')->name('delete.file');
-//         Route::resource('user', UserController::class);
-//         Route::resource('quotation', QuotationController::class);
-//     });
-// });
 
 Route::get('/document/show/{document}', [DocumentController::class, 'show'])->name('document.show');
 
@@ -64,4 +54,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function() {
     Route::get('document-convertion/{file}', [DocumentConvertionController::class, '_invoke'])->name('convertion.file');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/update-about', [ProfileController::class, 'updateAbout'])->name('about.update');
+    Route::put('/update-profile/{user}', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });

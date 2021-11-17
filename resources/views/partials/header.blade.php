@@ -73,12 +73,12 @@
                 <!-- Search -->
                 <!-- ============================================================== -->
                 <li class="nav-item search-box">
-                    <a
+                    {{-- <a
                         class="nav-link waves-effect waves-dark"
                         href="javascript:void(0)"
                         ><i class="ti-search"></i
-                    ></a>
-                    <form class="app-search position-absolute">
+                    ></a> --}}
+                    {{-- <form class="app-search position-absolute">
                         <input
                             type="text"
                             class="form-control"
@@ -87,7 +87,7 @@
                         <a class="srh-btn"
                             ><i class="ti-close"></i
                         ></a>
-                    </form>
+                    </form> --}}
                 </li>
             </ul>
             <!-- ============================================================== -->
@@ -129,22 +129,12 @@
                     >
                         <a
                             class="dropdown-item"
-                            href="javascript:void(0)"
+                            href="{{route('profile.index')}}"
                             ><i class="ti-user m-r-5 m-l-5"></i> My
                             Profile</a
                         >
 
-                        <a
-                            class="dropdown-item"
-                            href="javascript:void(0)"
-                            ><i
-                                class="
-                                    ti-settings
-                                    m-r-5 m-l-5
-                                "
-                            ></i>
-                            Account Setting</a
-                        >
+                       
                         <a
                             class="dropdown-item"
                             href="{{route('logout')}}"

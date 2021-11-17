@@ -39,6 +39,16 @@
             toastr.warning("{{ $error }}");
         @endforeach
     @endif
+
+    @if(Session::has('message'))
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.success("{{ session('message') }}");
+    @endif
+
 </script>  
 @endsection
 
@@ -189,19 +199,19 @@
                 <div class="row mt-4">
                     <div class="col-12 card">
                         <div class="card-body">
-                            <form action="">
+                            <form action="{{route('about.update')}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="">Tentang Aplikasi</label>
-                                            <textarea class="form-control" name="" id="" rows="17" ></textarea>
+                                            <textarea class="form-control" name="description" id="" rows="17" value="" >{{$about->description ?? ''}}</textarea>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 form-group mt-2">
-                                    <button class="btn btn-primary btn-block" onclick="">Simpan Data</button>
+                                    <button class="btn btn-primary btn-block" type="submit" onclick="">Simpan Data</button>
                                 </div>
                             </form>
                         </div>
@@ -223,7 +233,7 @@
                             <div class="col-8">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="{{route('user.update', $user->id)}}" method="POST">
+                                        <form action="{{route('profile.update', $user->id)}}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="col-12 form-group">
