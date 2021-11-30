@@ -203,8 +203,8 @@
                     
                 })
 
-                document.getElementById('load-content').innerHTML += 
-                    `<div class="p-2 mt-1">${documentText}</div>`
+                // document.getElementById('load-content').innerHTML += 
+                //     `<div class="p-2 mt-1">${documentText}</div>`
             })
 
             // // console.log(countKutipan)
