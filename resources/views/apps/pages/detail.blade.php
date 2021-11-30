@@ -166,11 +166,16 @@
 
                                 // console.log(docs, string)
                                 if(!isNaN(string)) {
-                                    console.log(string, 'oke')
-                                        sentences = documents[index]   
-                                        countKutipan++
+                                    
+                                    sentences = documents[index]   
+                                    if(sentences.length < 20) {
+                                        let i = index;
+                                        sentences = documents[i].concat(documents[i + 1])
+                                        // console.log(sentences.length, list, index, i+1)
+                                    }
+                                    countKutipan++
 
-                                    console.log(list, replace, documentText)
+                                    // console.log(list, replace, documentText)
                                     // documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                     document.getElementById('list-data').innerHTML += 
                                     `
