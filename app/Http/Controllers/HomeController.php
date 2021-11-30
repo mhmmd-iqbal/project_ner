@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        
+        $countDocument = 0;
         if(!is_null($keyword) && $keyword !== '') {
             $documents = Document::with('files')
             ->where('title', 'LIKE', '%' . $keyword . '%')
@@ -28,15 +28,16 @@ class HomeController extends Controller
                 $query->where('converted_text', 'LIKE', '%' . $keyword . '%');
             })
             ->get();
+            $countDocument = $documents->count();
 
-            if(count($documents) === 0) {
-            $documents = Document::with('files')
-                ->get();
+            if($countDocument === 0) {
+                $documents = Document::with('files')
+                    ->get();
             }
         }else{
             $documents = [];
         } 
-        return view('apps.pages.search', compact('documents', 'keyword'));
+        return view('apps.pages.search', compact('documents', 'keyword', 'countDocument'));
     }
 
     public function about()

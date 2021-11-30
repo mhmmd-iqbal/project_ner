@@ -48,7 +48,7 @@
 <div class="content-search">
     <div class="row">
         <div class="col-12 text">
-            {{count($documents)}} artikel ditemukan dalam kata kunci <i>{{$keyword}}</i>
+            {{$countDocument}} artikel ditemukan dalam kata kunci <i>{{$keyword}}</i>
         </div>
     </div>
     <div class="row">
