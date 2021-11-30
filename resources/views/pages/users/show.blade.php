@@ -122,7 +122,7 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Data User</h4>
+                <h4 class="page-title">Data Admin</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -133,7 +133,7 @@
                                 class="breadcrumb-item active"
                                 aria-current="page"
                             >
-                                User
+                                Admin
                             </li>
                         </ol>
                     </nav>
@@ -167,7 +167,7 @@
                             @csrf
                             @method('PUT')
                             <div class="col-12 form-group">
-                                <label for="">Nama User</label>
+                                <label for="">Nama Admin</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}">
                             </div>
                             <div class="col-12 form-group">
