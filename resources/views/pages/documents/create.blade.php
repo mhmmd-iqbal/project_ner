@@ -105,6 +105,13 @@
     };
 
     const createData = () => {
+        let creator = $('input[name=creator]').val()
+        let title   = $('input[name=title]').val()
+
+        if(creator === '' || title === ''){
+            return toastr.warning("Nama Mahasiswa dan Judul Tidak Boleh Kosong!");
+        }
+
         let method = 'POST'
         let url = "{{route('document.store')}}"
         let data = {
@@ -118,9 +125,13 @@
             url,
             data
         ).then((result) => {
-            return window.location.href = "{{route('document.index')}}"
+            if(result.status === 'success') {
+                return window.location.href = "{{route('document.index')}}"
+            } else {
+                return toastr.success("Failed to create data");
+            }
         }).catch((err) => {
-            
+            return toastr.success("Failed to create data");
         });
     }
 </script>
@@ -170,11 +181,11 @@
                             @csrf
                             <div class="col-12 form-group">
                                 <label for="">Nama Mahasiswa</label>
-                                <input type="text" class="form-control" name="creator">
+                                <input type="text" class="form-control" name="creator" required>
                             </div>
                             <div class="col-12 form-group">
                                 <label for="">Judul Skripsi</label>
-                                <input type="text" class="form-control" name="title">
+                                <input type="text" class="form-control" name="title" required>
                             </div>
                             <div class="col-12 form-group">
                                 <label for="">Upload Document Skripsi</label>

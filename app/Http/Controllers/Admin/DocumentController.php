@@ -9,7 +9,8 @@ use App\Traits\DocxConversion;
 use App\Traits\PDF2Text;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Smalot\PdfParser\Parser;
+use Yajra\DataTables\DataTables;
 
 class DocumentController extends Controller
 {
@@ -18,10 +19,32 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $documents = Document::with('files')->get();
-        return view('pages.documents.index', compact('documents'));
+        if($request->ajax()) {
+            $documents = Document::with('files')->get();
+            return DataTables::of($documents)
+            ->addIndexColumn()
+            ->addColumn('modalShow', function($data){
+                return '<a href="#" onclick="openModal(this)" data-target="detail" data-value="'.$data->id.'" > '.$data->title.'</a>';
+            })
+            ->addColumn('createdAt', function($data){
+                return date('d-m-Y H:i:s', strtotime($data->created_at));
+            })
+            ->addColumn('action', function ($data){
+                return '
+                    <button class="btn btn-success  text-white " onclick="openModal(this)" data-target="update" data-value="'.$data->id.'" ><i class="mdi mdi-update"></i></button>
+                    <button class="btn btn-danger  text-white " onclick="openModal(this)" data-target="delete" data-value="'.$data->id.'"><i class="mdi mdi-delete-empty"></i></button>
+                ';
+            })
+            ->rawColumns([
+                'modalShow',
+                'createdAt',
+                'action'
+            ])
+            ->make(true);
+        }
+        return view('pages.documents.index');
     }
 
     /**
@@ -51,7 +74,8 @@ class DocumentController extends Controller
                 'file'      => $imageName
             ]);
         }else{
-            DB::transaction(function () use ($request) {
+            DB::beginTransaction();
+            try {
                 $converted_text = null;
                 $document = Document::create(
                     [
@@ -73,11 +97,22 @@ class DocumentController extends Controller
                             break;
                         
                         case 'pdf':
-                            $information = new PDF2Text();
-                            $information->setFilename($path); 
-                            $information->decodePDF();
-                            $converted_text = self::convert_from_latin1_to_utf8_recursively($information->output());
-                            
+                            // $information = new PDF2Text();
+                            // $information->setFilename($path); 
+                            // $information->decodePDF();
+                            // $converted_text = self::convert_from_latin1_to_utf8_recursively($information->output());
+                            // dd($converted_text);
+
+                            $converted_text = '';
+
+                            $parser = new Parser();
+                            $pdf    = $parser->parseFile($path);
+                            $pages  = $pdf->getPages();
+
+                            // Loop over each page to extract text.
+                            foreach ($pages as $page) {
+                                $converted_text .= $page->getText() . PHP_EOL;
+                            }
                             break;
                             
                         default:
@@ -91,13 +126,20 @@ class DocumentController extends Controller
                         ]
                     );
                 }
-            });
-
-            return response()->json(
-                [
-                    'status'    => 'success'
-                ]
-            );
+                DB::commit();
+                return response()->json(
+                    [
+                        'status'    => 'success'
+                    ]
+                );
+            } catch (\Throwable $th) {
+                DB::rollback();
+                return response()->json(
+                    [
+                        'status'    => 'error'
+                    ]
+                );
+            }
         }
     }
 
@@ -133,7 +175,28 @@ class DocumentController extends Controller
      */
     public function update(Request $request, Document $document)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $document->update([
+                'title'     => $request->title,
+                'creator'   => $request->creator
+            ]);
+            DB::commit();
+
+            return response()->json(
+                [
+                    'status'    => 'success'
+                ]
+            );
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            return response()->json(
+                [
+                    'status'    => 'error'
+                ]
+            );
+        }
     }
 
     /**

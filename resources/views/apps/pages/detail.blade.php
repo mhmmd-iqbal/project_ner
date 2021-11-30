@@ -135,7 +135,7 @@
                                         `
                                         <tr>
                                             <td>${countKutipan}</td>
-                                            <td>${list}</td>
+                                            <td style="width: 200px">${list}</td>
                                             <td style="text-align: left">${sentences}</td>
                                         </tr>
                                         `

@@ -49,6 +49,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function() {
     Route::get('/document/create', [DocumentController::class, 'create'])->name('document.create');
     Route::post('/document/store', [DocumentController::class, 'store'])->name('document.store');
     Route::delete('/document/destroy/{document}', [DocumentController::class, 'destroy'])->name('document.destroy');
+    Route::put('/document/update/{document}', [DocumentController::class, 'update'])->name('document.update');
 
     Route::post('delete/file', [DocumentController::class, 'fileDestroy'])->name('delete.file');
     Route::get('document-convertion/{file}', [DocumentConvertionController::class, '_invoke'])->name('convertion.file');

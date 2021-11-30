@@ -16,7 +16,15 @@ class DocumentFile extends Model
         'converted_text'
     ];
 
+    protected $appends = [
+        'public_path'
+    ];
+
     public function skripsi(){
         return $this->belongsTo(Skripsi::class, 'document_id', 'id');
+    }
+
+    public function getPublicPathAttribute(){
+        return  url('documents/'.$this->file_name);
     }
 }

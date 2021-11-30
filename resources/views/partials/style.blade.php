@@ -20,6 +20,8 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+<link href="{{{ URL::asset('assets/datatables/datatables.min.css')}}}" rel="stylesheet" media="all">
+
 <style>
 .primary-1 {
     color: #0b9444

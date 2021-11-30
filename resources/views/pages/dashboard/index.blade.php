@@ -4,7 +4,9 @@
 
 @section('scripts')
     <script>
-    
+        const redirect = (e) => {
+            window.location.href = e
+        }
     </script>    
 @endsection
 
@@ -13,6 +15,10 @@
     .content{
         border: 1px solid rgb(191, 187, 187);
         border-radius: 20px;
+    }
+    .text-link {
+        cursor: pointer;
+        text-align: right; 
     }
 </style>    
 @endsection
@@ -55,8 +61,39 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
+                <h3>Selamat Datang, {{Auth::user()->name}}</h3>
+            </div>
+            <div class="col-12">
                 <div class="card p-5">
-                    <div class="card-body">
+                    <div class="d-flex justify content-start">
+                        <div class="card text-white bg-success mb-3" style="width: 18rem; margin-right: 2%">
+                            {{-- <div class="card-header">Header</div> --}}
+                            <div class="card-body">
+                                <h5 class="card-title pb-2" style="border-bottom: 1px solid white">
+                                    <i class="fa fa-book"></i> {{$countDocument}} Total Judul Skripsi</h5>
+                                <p class="card-text pt-3 text-link" style="" onclick="redirect('{{route('document.index')}}')">
+                                    lihat selengkapnya <i class="fa fa-chevron-right"></i></p>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-warning mb-3" style="width: 18rem; margin-right: 2%">
+                            {{-- <div class="card-header">Header</div> --}}
+                            <div class="card-body">
+                                <h5 class="card-title pb-2" style="border-bottom: 1px solid white">
+                                    <i class="fa fa-user"></i> {{$countUsers}} Total User</h5>
+                                <p class="card-text pt-3 text-link" style="" onclick="redirect('{{route('user.index')}}')">
+                                    lihat selengkapnya <i class="fa fa-chevron-right"></i></p>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-primary mb-3" style="width: 18rem; margin-right: 2%">
+                            {{-- <div class="card-header">Header</div> --}}
+                            <div class="card-body">
+                                <h5 class="card-title pb-2" style="border-bottom: 1px solid white">
+                                    <i class="fa fa-settings"></i> Update Profil Aplikasi</h5>
+                                    <p class="card-text pt-3 text-link" style="" onclick="redirect('{{route('profile.index')}}')">
+                                    lihat selengkapnya <i class="fa fa-chevron-right"></i></p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
