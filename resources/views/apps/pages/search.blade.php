@@ -56,7 +56,7 @@
             @foreach ($documents as $document)
             <div class="result my-2">
                 <h4>
-                    <a href="{{route('show', $document->id)}}"> {{$document->title}} </a>
+                    <a href="{{route('show', $document->id)}}" target="_blank"> {{$document->title}} </a>
                 </h4>
                 <div>Oleh <span>{{$document->creator}}</span></div>
                 <div class="description">
