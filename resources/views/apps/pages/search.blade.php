@@ -61,7 +61,11 @@
                 <div>Oleh <span>{{$document->creator}}</span></div>
                 <div class="description">
                     @foreach ($document->files as $file)
-                        {{$string = mb_strimwidth($file->converted_text, 0, 97, '...') }}
+                        @php
+                            if(str_contains($file->converted_text, $keyword)){
+                                    echo mb_strimwidth(substr($file->converted_text,strpos($file->converted_text,$keyword)), 0, 400, '...');
+                            }
+                        @endphp
                     @endforeach
                 </div>
             </div>

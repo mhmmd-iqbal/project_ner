@@ -34,7 +34,7 @@
         <h3 class="text-uppercase"> {{$document->title}} </h3>
         <h5 class="text-uppercase"> <i> {{$document->creator}} </i>  </h5>
     </div>
-    <div class="col-12">
+    {{-- <div class="col-12">
         <div class="card ">
             <div class="card-header"><h4>Hasil Ekstraksi Data</h4></div>
             <div class="card-body">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-12">
         <div class="card">
             <div class="card-header"><h4>List Ditemukan</h4> </div>
