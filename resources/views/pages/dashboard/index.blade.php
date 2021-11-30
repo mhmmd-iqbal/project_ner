@@ -79,7 +79,7 @@
                             {{-- <div class="card-header">Header</div> --}}
                             <div class="card-body">
                                 <h5 class="card-title pb-2" style="border-bottom: 1px solid white">
-                                    <i class="fa fa-user"></i> {{$countUsers}} Total User</h5>
+                                    <i class="fa fa-user"></i> {{$countUsers}} Total Admin</h5>
                                 <p class="card-text pt-3 text-link" style="" onclick="redirect('{{route('user.index')}}')">
                                     lihat selengkapnya <i class="fa fa-chevron-right"></i></p>
                             </div>
