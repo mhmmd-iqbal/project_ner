@@ -22,16 +22,20 @@ class HomeController extends Controller
 
         
         if(!is_null($keyword) && $keyword !== '') {
-            $documents = Document::with('files');
-            $documents = $documents->where('title', 'LIKE', '%' . $keyword . '%')
+            $documents = Document::with('files')
+            ->where('title', 'LIKE', '%' . $keyword . '%')
             ->orWhereHas('files', function($query) use ($keyword){
                 $query->where('converted_text', 'LIKE', '%' . $keyword . '%');
-            });
-            $documents = $documents->get();
-        } else {
-            $documents = [];
-        }
+            })
+            ->get();
 
+            if(count($documents) === 0) {
+            $documents = Document::with('files')
+                ->get();
+            }
+        }else{
+            $documents = [];
+        } 
         return view('apps.pages.search', compact('documents', 'keyword'));
     }
 

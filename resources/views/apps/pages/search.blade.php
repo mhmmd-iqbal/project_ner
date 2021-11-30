@@ -60,13 +60,23 @@
                 </h4>
                 <div>Oleh <span>{{$document->creator}}</span></div>
                 <div class="description">
+                    @php
+                        $iterasi = 0;
+                    @endphp
                     @foreach ($document->files as $file)
                         @php
                             if(str_contains($file->converted_text, $keyword)){
-                                    echo mb_strimwidth(substr($file->converted_text,strpos($file->converted_text,$keyword)), 0, 400, '...');
+                                echo mb_strimwidth(substr($file->converted_text,strpos($file->converted_text,$keyword)), 0, 400, '...');
+                                $iterasi++;
                             }
-                        @endphp
+                            
+                            @endphp
                     @endforeach
+                    @php
+                    if($iterasi < 1) {
+                        echo mb_strimwidth(substr($document->files[0]->converted_text,strpos($document->files[0]->converted_text,$keyword)), 0, 400, '...');
+                    }   
+                    @endphp
                 </div>
             </div>
             @endforeach
