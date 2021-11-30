@@ -119,7 +119,7 @@
                         href="{{route('user.index')}}"
                         aria-expanded="false"
                         ><i class="mdi mdi-account-multiple"></i
-                        ><span class="hide-menu">Data User</span></a
+                        ><span class="hide-menu">Data Admin</span></a
                     >
                 </li>
                 {{-- <li class="sidebar-item">
