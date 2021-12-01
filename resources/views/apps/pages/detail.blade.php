@@ -46,7 +46,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header"><h4>List Ditemukan</h4> </div>
-            <div class="card-body">
+            <div class="card-body scroll">
                 <div class="row">
                     <div class="col-12 mb-5" id="count-kutipan" style="font-weight: bold">
                         0 Kutipan Ditemukan
@@ -59,7 +59,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header"><h4>Data Kutipan</h4></div>
-            <div class="card-body">
+            <div class="card-body scroll">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -69,6 +69,23 @@
                         </tr>
                     </thead>
                     <tbody id="list-kutipan"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header"><h4>Data Error</h4></div>
+            <div class="card-body scroll">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kutipan</th>
+                            <th>Kalimat Kutipan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-kutipan-error"></tbody>
                 </table>
             </div>
         </div>
@@ -85,6 +102,7 @@
         .then(data => {
             let documentText = ''
             let countKutipan = 0;
+            let countErrorKutipan = 0;
             data.files.map((e) => {
                 id = e.id
                 url = "{{route('convertion.file', 'dataID')}}".replace('dataID', id)
@@ -140,6 +158,28 @@
                                         </tr>
                                         `
                                 }
+                            } else { 
+                                let find = list;
+                                let sentences = docs
+
+                                if(
+                                    docs.replace(/\s/g,'') == string.replace(/\s/g,'')
+                                    )
+                                {
+                                    sentences = documents[index-1]   
+                                }
+
+                                countErrorKutipan++
+
+                               
+                                document.getElementById('list-kutipan-error').innerHTML += 
+                                    `
+                                    <tr>
+                                        <td>${countErrorKutipan}</td>
+                                        <td style="width: 200px">${list}</td>
+                                        <td style="text-align: left">${sentences}</td>
+                                    </tr>
+                                    `
                             }
                         })
                     }
@@ -171,7 +211,6 @@
                                     if(sentences.length < 20) {
                                         let i = index;
                                         sentences = documents[i].concat(documents[i + 1])
-                                        // console.log(sentences.length, list, index, i+1)
                                     }
                                     countKutipan++
 
@@ -185,6 +224,25 @@
                                         `
                                         <tr>
                                             <td>${countKutipan}</td>
+                                            <td style="width: 200px">${String(list)}</td>
+                                            <td style="text-align: left">${sentences}</td>
+                                        </tr>
+                                        `
+                                } else { 
+                                    sentences = documents[index]   
+                                    if(sentences.length < 20) {
+                                        let i = index;
+                                        sentences = documents[i].concat(documents[i + 1])
+                                    }
+                                    console.log(list, sentences)
+
+                                    countErrorKutipan++
+
+                                
+                                    document.getElementById('list-kutipan-error').innerHTML += 
+                                        `
+                                        <tr>
+                                            <td>${countErrorKutipan}</td>
                                             <td style="width: 200px">${list}</td>
                                             <td style="text-align: left">${sentences}</td>
                                         </tr>
@@ -196,8 +254,7 @@
                                 // {
                                 //     sentences = documents[index-1]   
                                 // }
-
-                            }
+                            } 
                         })
                     }
                     
