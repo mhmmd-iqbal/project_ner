@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'] )->name('index');
-Route::post('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/document/{document}', [HomeController::class, 'show'])->name('show');
 

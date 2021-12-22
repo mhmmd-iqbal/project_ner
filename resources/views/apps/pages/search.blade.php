@@ -35,16 +35,14 @@
 @endsection
 
 @section('content')
-<form action="" method="POST">
-    @csrf
-    <div class="input-group rounded">
-        <input type="search" class="form-control rounded" name="keyword" placeholder="Cari Judul..." aria-label="Search"
-        aria-describedby="search-addon" />
-        <button class="input-group-text btn-warning border-0" id="search-addon">
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
-</form>
+<div class="input-group rounded">
+    <input type="search" class="form-control rounded" name="keyword" id="keyword" value="{{$keyword}}"  placeholder="Cari Judul..." aria-label="Search"
+    aria-describedby="search-addon" />
+    <button class="input-group-text btn-warning border-0" id="search-addon" onclick="search()">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+
 <div class="content-search">
     <div class="row">
         <div class="col-12 text">
@@ -83,4 +81,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script>
+
+        $('#keyword').keypress((e) => {
+            if (e.keyCode == 13)
+                search()
+        })
+
+        const search = () => {
+            let keyword = $('input[name=keyword]').val()
+            window.location.href = `{{route('search')}}?keyword=${keyword}`
+        }
+    </script>
 @endsection
