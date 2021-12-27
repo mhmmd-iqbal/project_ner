@@ -107,7 +107,7 @@
                 id = e.id
                 url = "{{route('convertion.file', 'dataID')}}".replace('dataID', id)
 
-                documentText = e.converted_text
+                documentText = e.text_format
 
                 let documents = documentText.split('.')
                 // documents.pop();    

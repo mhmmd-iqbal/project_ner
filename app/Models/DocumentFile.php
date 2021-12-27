@@ -17,7 +17,8 @@ class DocumentFile extends Model
     ];
 
     protected $appends = [
-        'public_path'
+        'public_path',
+        'text_format'
     ];
 
     public function skripsi(){
@@ -26,5 +27,12 @@ class DocumentFile extends Model
 
     public function getPublicPathAttribute(){
         return  url('documents/'.$this->file_name);
+    }
+
+    public function getTextFormatAttribute(){
+        $string =  trim(preg_replace('/\s+/', ' ', $this->converted_text));
+        $string = preg_replace('~[\r\n]+~', '', $string);
+
+        return $string;
     }
 }
