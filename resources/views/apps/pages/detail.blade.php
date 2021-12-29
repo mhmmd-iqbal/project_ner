@@ -110,11 +110,7 @@
                 documentText = e.text_format
 
                 let documents = documentText.split('.')
-                // documents.pop();    
-                // var documnets = documents.join(".");
-                // documents.map((doc, index) => {
 
-                // })
                 $.each(documents, function (index, docs) { 
                     let matchesAPPAStyle = docs.match(/\((.*?)\)/g);  // dari text menghasilkan array  
                     if(matchesAPPAStyle){
@@ -134,17 +130,9 @@
                                     let replace = new RegExp(find, 'g');
                                     let getStringOnly = documents[index].replace(/\s/g,'').replace(string.replace(/\s/g,''), '')
                                     let sentences = getStringOnly.length < 5 ? documents[index-1] : documents[index]
-                                    // let sentences = documents[index]
-
-                                    // if(
-                                    //     documents[index].replace(/\s/g,'') == string.replace(/\s/g,'')
-                                    //     )
-                                    // {
-                                    //     sentences = documents[index-1]   
-                                    // }
 
                                     countKutipan++
-                                    documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+                                    // documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                     document.getElementById('list-data').innerHTML += 
                                     `
                                         <div class="col-2">${list}</div>
@@ -160,16 +148,9 @@
                                 }
                             } else { 
                                 let find = list;
-                                // let sentences = documents[index]
                                 let getStringOnly = documents[index].replace(/\s/g,'').replace(string.replace(/\s/g,''), '')
                                 let sentences = getStringOnly.length < 5 ? documents[index-1] : documents[index]
 
-                                // if(
-                                //     document[index].replace(/\s/g,'') == string.replace(/\s/g,'')
-                                //     )
-                                // {
-                                //     sentences = documents[index-1]   
-                                // }
 
                                 countErrorKutipan++
 
@@ -197,77 +178,67 @@
                             .pop()
                             .replace(/[\[\]']+/g,'')
 
+                            console.log(/[^$,\.\d]/.test(string), string, string.includes(','), list)
+
                             // force to parse integer
-                            string = parseInt(string)
+                            stringParse = parseInt(string)
                             
-                            // check string apakah valid numeric
-                            if(typeof string === 'number') {
-                                let find = list;
-                                let replace = new RegExp(find, 'g');
-                                let sentences = docs
+                            if(!/[^$,\.\d]/.test(string) &&  !string.includes(',')) {
+                                // check string apakah valid numeric
+                                if(typeof stringParse === 'number') {
+                                    let find = list;
+                                    let replace = new RegExp(find, 'g');
+                                    let sentences = docs
+                                    if(!isNaN(stringParse)) {
+                                        sentences = documents[index]   
+                                        if(sentences.length < 20) {
+                                            let i = index;
+                                            sentences = documents[i].concat(documents[i + 1])
+                                        }
+                                        countKutipan++
 
-                                // console.log(docs, string)
-                                if(!isNaN(string)) {
-                                    
-                                    sentences = documents[index]   
-                                    if(sentences.length < 20) {
-                                        let i = index;
-                                        sentences = documents[i].concat(documents[i + 1])
-                                    }
-                                    countKutipan++
-
-                                    // console.log(list, replace, documentText)
-                                    documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
-                                    document.getElementById('list-data').innerHTML += 
-                                    `
-                                        <div class="col-2">${list}</div>
-                                    `
-                                    document.getElementById('list-kutipan').innerHTML += 
+                                        // documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+                                        document.getElementById('list-data').innerHTML += 
                                         `
-                                        <tr>
-                                            <td>${countKutipan}</td>
-                                            <td style="width: 200px">${String(list)}</td>
-                                            <td style="text-align: left">${sentences}</td>
-                                        </tr>
+                                            <div class="col-2">${list}</div>
                                         `
-                                } else { 
-                                    sentences = documents[index]   
-                                    if(sentences.length < 20) {
-                                        let i = index;
-                                        sentences = documents[i].concat(documents[i + 1])
-                                    }
-                                    // console.log(list, sentences)
-
-                                    countErrorKutipan++
-
-                                
-                                    document.getElementById('list-kutipan-error').innerHTML += 
-                                        `
-                                        <tr>
-                                            <td>${countErrorKutipan}</td>
-                                            <td style="width: 200px">${list}</td>
-                                            <td style="text-align: left">${sentences}</td>
-                                        </tr>
-                                        `
+                                        document.getElementById('list-kutipan').innerHTML += 
+                                            `
+                                            <tr>
+                                                <td>${countKutipan}</td>
+                                                <td style="width: 200px">${String(list)}</td>
+                                                <td style="text-align: left">${sentences}</td>
+                                            </tr>
+                                            `
+                                    } 
                                 } 
-                                // if(
-                                //     document[index].replace(/\s/g,'') == string.replace(/\s/g,'')
-                                //     )
-                                // {
-                                //     sentences = documents[index-1]   
-                                // }
-                            } 
+                            } else {
+                                sentences = documents[index]   
+                                if(sentences.length < 20) {
+                                    let i = index;
+                                    sentences = documents[i].concat(documents[i + 1])
+                                }
+
+                                countErrorKutipan++
+
+                            
+                                document.getElementById('list-kutipan-error').innerHTML += 
+                                    `
+                                    <tr>
+                                        <td>${countErrorKutipan}</td>
+                                        <td style="width: 200px">${list}</td>
+                                        <td style="text-align: left">${sentences}</td>
+                                    </tr>
+                                    `
+                            }
                         })
                     }
                     
                 })
 
-                // document.getElementById('load-content').innerHTML += 
-                //     `<div class="p-2 mt-1">${documentText}</div>`
             })
 
             // // console.log(countKutipan)
-            console.log(countKutipan)
             $('#count-kutipan').html(`${countKutipan} Kutipan Ditemukan`)
         })
         
