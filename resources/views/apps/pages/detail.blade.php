@@ -116,7 +116,7 @@
 
                 // })
                 $.each(documents, function (index, docs) { 
-                    let matchesAPPAStyle = docs.match(/\((.*?)\)/g);  // dari text menghasilkan array   
+                    let matchesAPPAStyle = docs.match(/\((.*?)\)/g);  // dari text menghasilkan array  
                     if(matchesAPPAStyle){
                         matchesAPPAStyle.map((list) => {
                             // menghapus semua spasi
@@ -125,7 +125,6 @@
                                 .split(":")
                                 .pop()
 
-
                             // cek apakah ada tanda comma
                             if(string.indexOf(',') != -1 ) {
                                 // cek apakah hasil tidak null dan di dalam string ada 4 integer berurutan
@@ -133,17 +132,18 @@
                                 .match(/^[0-9]{4}$/)) {
                                     let find = list;
                                     let replace = new RegExp(find, 'g');
-                                    let sentences = docs
+                                    let getStringOnly = documents[index].replace(/\s/g,'').replace(string.replace(/\s/g,''), '')
+                                    let sentences = getStringOnly.length < 5 ? documents[index-1] : documents[index]
+                                    // let sentences = documents[index]
 
-                                    if(
-                                        docs.replace(/\s/g,'') == string.replace(/\s/g,'')
-                                        )
-                                    {
-                                        sentences = documents[index-1]   
-                                    }
+                                    // if(
+                                    //     documents[index].replace(/\s/g,'') == string.replace(/\s/g,'')
+                                    //     )
+                                    // {
+                                    //     sentences = documents[index-1]   
+                                    // }
 
                                     countKutipan++
-
                                     documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                     document.getElementById('list-data').innerHTML += 
                                     `
@@ -160,14 +160,16 @@
                                 }
                             } else { 
                                 let find = list;
-                                let sentences = docs
+                                // let sentences = documents[index]
+                                let getStringOnly = documents[index].replace(/\s/g,'').replace(string.replace(/\s/g,''), '')
+                                let sentences = getStringOnly.length < 5 ? documents[index-1] : documents[index]
 
-                                if(
-                                    docs.replace(/\s/g,'') == string.replace(/\s/g,'')
-                                    )
-                                {
-                                    sentences = documents[index-1]   
-                                }
+                                // if(
+                                //     document[index].replace(/\s/g,'') == string.replace(/\s/g,'')
+                                //     )
+                                // {
+                                //     sentences = documents[index-1]   
+                                // }
 
                                 countErrorKutipan++
 
@@ -215,7 +217,7 @@
                                     countKutipan++
 
                                     // console.log(list, replace, documentText)
-                                    // documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
+                                    documentText = documentText.replace(replace, `<span class="text-uppercase" style="font-weight: bold">${list.replace(/[()]/g,'')}</span>`)
                                     document.getElementById('list-data').innerHTML += 
                                     `
                                         <div class="col-2">${list}</div>
@@ -234,7 +236,7 @@
                                         let i = index;
                                         sentences = documents[i].concat(documents[i + 1])
                                     }
-                                    console.log(list, sentences)
+                                    // console.log(list, sentences)
 
                                     countErrorKutipan++
 
@@ -249,7 +251,7 @@
                                         `
                                 } 
                                 // if(
-                                //     docs.replace(/\s/g,'') == string.replace(/\s/g,'')
+                                //     document[index].replace(/\s/g,'') == string.replace(/\s/g,'')
                                 //     )
                                 // {
                                 //     sentences = documents[index-1]   
@@ -265,6 +267,7 @@
             })
 
             // // console.log(countKutipan)
+            console.log(countKutipan)
             $('#count-kutipan').html(`${countKutipan} Kutipan Ditemukan`)
         })
         
