@@ -185,7 +185,7 @@
                             
                             if(!/[^$,\.\d]/.test(string) &&  !string.includes(',')) {
                                 // check string apakah valid numeric
-                                if(typeof stringParse === 'number') {
+                                if(typeof stringParse === 'number' && stringParse > 0) {
                                     let find = list;
                                     let replace = new RegExp(find, 'g');
                                     let sentences = docs
