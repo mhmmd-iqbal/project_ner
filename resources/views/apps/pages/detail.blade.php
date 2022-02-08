@@ -110,7 +110,6 @@
                 documentText = e.text_format
 
                 let documents = documentText.split('.')
-
                 $.each(documents, function (index, docs) { 
                     let matchesAPPAStyle = docs.match(/\((.*?)\)/g);  // dari text menghasilkan array  
                     if(matchesAPPAStyle){
@@ -167,18 +166,24 @@
                         })
                     }
                 }); 
+
+                // documents = documentText.split(' ')
                 $.each(documents, function (index, docs) { 
                     let matchesIEEEStyle = docs.match(/\[(.*?)\]/g);  // dari text menghasilkan array   
-                    if(matchesIEEEStyle){
+                    if(
+                        (matchesIEEEStyle) && 
+                        (docs[docs.length -1] === ']') || 
+                        (docs[docs.length -1] === '!')
+                    ){
                         matchesIEEEStyle.map((list) => {
+                            console.log(docs);
                             // menghapus semua spasi dan bracket
                             string = (list)
                             .replace(/ /g,'')
                             .split(":")
                             .pop()
                             .replace(/[\[\]']+/g,'')
-
-                            console.log(/[^$,\.\d]/.test(string), string, string.includes(','), list)
+                            // console.log(/[^$,\.\d]/.test(string), string, string.includes(','), list)
 
                             // force to parse integer
                             stringParse = parseInt(string)
